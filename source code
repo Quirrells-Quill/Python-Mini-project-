@@ -1,0 +1,683 @@
+import tkinter
+from tkinter import messagebox
+from tkinter import ttk
+import time
+import datetime
+from tkinter import *
+from datetime import datetime
+import copy
+admin_id = "Dr.Sudha"
+admin_pass = "1679"
+def admin_login():
+    if(admin_username_entry.get()==admin_id):
+        if(admin_password_entry.get() == admin_pass):
+            window.destroy()
+        else:
+            windowtre = tkinter.Tk()
+            windowtre.title("INVALID LOGIN")
+            windowtre.geometry('900x440')
+            windowtre.configure(bg='#333333')
+            saved_label = tkinter.Label(windowtre, text="INVALID PASSWORD, TRY AGAIN", bg='#333333', fg="#2ff900", font=("Arial", 30))
+            saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+            windowtre.mainloop()
+            exit()
+    else:
+            windowtre = tkinter.Tk()
+            windowtre.title("INVALID ID")
+            windowtre.geometry('900x440')
+            windowtre.configure(bg='#333333')
+            saved_label = tkinter.Label(windowtre, text="INVALID ID, try running the code again", bg='#333333', fg="#2ff900", font=("Arial", 30))
+            saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+            windowtre.mainloop()
+            exit()
+
+            
+window = tkinter.Tk()
+window.title("Admin authentication")
+window.geometry('800x600')
+window.configure(bg='#333333')
+frame = tkinter.Frame(bg='#333333')
+admin_login_label = tkinter.Label(
+    frame, text="Admin Login", bg='#333333', fg="#1388e9", font=("Arial", 30))
+admin_username_label = tkinter.Label(
+    frame, text="Admin Username", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+admin_username_entry = tkinter.Entry(frame, font=("Arial", 16))
+
+
+admin_password_entry = tkinter.Entry(frame, show="*", font=("Arial", 16))
+admin_password_label = tkinter.Label(
+    frame, text="Admin password", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+login_button = tkinter.Button(
+    frame, text="Admin Login", bg="#1388e9", fg="#FFFFFF", font=("Arial", 16), command = admin_login)
+
+
+# Placing widgets on the screen
+admin_login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+admin_username_label.grid(row=1, column=0)
+admin_password_label.grid(row=2, column=0)
+
+admin_username_entry.grid(row=1, column=1, pady=20)
+admin_password_entry.grid(row=2, column=1, pady=20)
+login_button.grid(row=4, column=3, columnspan=2, pady=30)
+
+frame.pack()
+window.mainloop()
+##################################################################################################################################
+firstname = []
+lastname  = []
+gender = []
+age =[]
+typeemployee =[]
+empolyee_ID = []
+passw = []
+count = 0
+counter = 3
+personal_leave = 20
+medical_leave = 12
+leavedays = 0
+def enter_data():
+        global status
+        global timein 
+        global timeout
+        global time_worked
+        global venue_code_in
+        global venue_code_out 
+        global overtime  
+        global latepunch 
+        global earlypunch 
+        global leavedays
+        global firstname
+        global lastname
+        global gender
+        global age
+        global typeemployee 
+        global empolyee_ID 
+        global passw 
+        global count
+        global counter
+        global personal_leave 
+        global medical_leave
+        firstname.append( first_name_entry.get())
+        lastname.append(last_name_entry.get())
+        if firstname and lastname:
+            gender.append( Gender_combobox.get() )
+            age.append(age_spinbox.get())
+            typeemployee.append( typemp_combobox.get())
+            empolyee_ID.append(EMPID_entry.get())
+            passw.append(pass_entry.get())
+            count = count + 1
+            first_name_entry.delete(0, 'end')
+            last_name_entry.delete(0, 'end')
+            Gender_combobox.set('')
+            age_spinbox.delete(0, 'end')
+            typemp_combobox.set('')
+            EMPID_entry.delete(0, 'end')
+            pass_entry.delete(0, 'end')
+            if count==counter:
+                window.destroy()
+            windowy = tkinter.Tk()
+            windowy.title("Data saved")
+            windowy.geometry('700x250')
+            windowy.configure(bg='#333333')
+            saved_label = tkinter.Label(windowy, text="Data for employee saved successfully", bg='#333333', fg="#2ff900", font=("Arial", 30))
+            saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+            windowy.mainloop()
+            
+
+        else:
+            messagebox.showinfo(title="Error", message="First name and last name are required.")
+        
+status = [0]*counter
+timein = [0]*counter
+timeout= [0]*counter
+timein_hour = [0]*counter
+timein_seconds= [0]*counter
+timein_minute= [0]*counter
+time_worked= [0]*counter
+venue_code_in = [0]*counter
+venue_code_out = [0]*counter
+overtime  = [0]*counter
+latepunch = [0]*counter
+earlypunch = [0] *counter
+atten = [0] * counter
+temp = [0]*counter
+tempover=[0]*counter
+timein_day =[0]*counter 
+timein_month =[0]*counter
+timein_year=[0]*counter
+timeout_hour=[0]*counter
+timeout_seconds=[0]*counter
+timeout_minute=[0]*counter
+timeout_day=[0]*counter
+timeout_month=[0]*counter
+timeout_year=[0]*counter
+
+window = tkinter.Tk()
+window.title("Data Entry Form")
+
+frame = tkinter.Frame(window)
+frame.pack()
+
+# Saving User Info
+user_info_frame =tkinter.LabelFrame(frame, text="User Information")
+user_info_frame.grid(row= 0, column=0, padx=20, pady=10)
+
+first_name_label = tkinter.Label(user_info_frame, text="First Name")
+first_name_label.grid(row=0, column=0)
+last_name_label = tkinter.Label(user_info_frame, text="Last Name")
+last_name_label.grid(row=0, column=1)
+
+first_name_entry = tkinter.Entry(user_info_frame)
+last_name_entry = tkinter.Entry(user_info_frame)
+first_name_entry.grid(row=1, column=0)
+last_name_entry.grid(row=1, column=1)
+
+Gender_label = tkinter.Label(user_info_frame, text="Gender")
+Gender_combobox = ttk.Combobox(user_info_frame, values=["Male", "Female",])
+Gender_label.grid(row=0, column=2)
+Gender_combobox.grid(row=1, column=2)
+
+age_label = tkinter.Label(user_info_frame, text="Age")
+age_spinbox = tkinter.Spinbox(user_info_frame, from_=18, to=110)
+age_label.grid(row=2, column=0)
+age_spinbox.grid(row=3, column=0)
+
+typemp_label = tkinter.Label(user_info_frame, text="Type of employee")
+typemp_combobox = ttk.Combobox(user_info_frame, values=["Permanent" , "Intern"])
+typemp_label.grid(row=2, column=1)
+typemp_combobox.grid(row=3, column=1)
+
+for widget in user_info_frame.winfo_children():
+    widget.grid_configure(padx=10, pady=5)
+
+
+# Saving Course Info
+courses_frame = tkinter.LabelFrame(frame)
+courses_frame.grid(row=1, column=0, sticky="news", padx=20, pady=10)
+
+EMPID_label = tkinter.Label(courses_frame, text= "Employee ID")
+EMPID_entry= tkinter.Entry(courses_frame)
+EMPID_label.grid(row=0, column=1)
+EMPID_entry.grid(row=1, column=1)
+
+pass_label = tkinter.Label(courses_frame, text= "Password")
+pass_entry= tkinter.Entry(courses_frame)
+pass_label.grid(row=0, column=2)
+pass_entry.grid(row=1, column=2)
+
+for widget in courses_frame.winfo_children():
+    widget.grid_configure(padx=10, pady=5)
+
+
+# Button
+button = tkinter.Button(frame, text="Enter data", command= enter_data)
+button.grid(row=3, column=0, sticky="news", padx=20, pady=10)
+ 
+window.mainloop()
+
+###The Original display age that will be on at all times (default)
+window_login = tkinter.Tk()
+window_login.title("Login form")
+window_login.geometry('800x500')
+window_login.configure(bg='#333333')
+frame = tkinter.Frame(bg='#333333')
+
+
+
+def login():
+    global status
+    global timein 
+    global timeout
+    global time_worked
+    global venue_code_in
+    global venue_code_out 
+    global overtime  
+    global latepunch 
+    global earlypunch 
+    global leavedays
+    global firstname
+    global lastname
+    global gender
+    global age
+    global typeemployee 
+    global empolyee_ID 
+    global passw 
+    global count
+    global counter
+    global personal_leave 
+    global medical_leave
+    global timein_hour
+    global timein_seconds
+    global timein_minute
+    global timein_day
+    global timein_month
+    global timein_year
+    global timeout_hour
+    global timeout_seconds
+    global timeout_minute
+    global timeout_day
+    global timeout_month
+    global timeout_year
+    un = username_entry.get()
+    pas= password_entry.get()
+    if un in empolyee_ID:
+        inde = empolyee_ID.index(un)
+        if (passw[inde] == pas):
+            if(status[inde] == 0):
+                  venue_code_in[inde] = venue_entry.get()
+                  atten[inde] = "Present"
+                  timein_temp = datetime.now()
+                  timein[inde] = datetime.now()
+                  status[inde] = 1
+                  timein_hour[inde] = int(timein_temp.hour)
+                  timein_minute[inde] = int(timein_temp.minute)
+                  timein_seconds[inde] =  int(timein_temp.second)
+                  timein_day[inde] = int(timein_temp.day)
+                  timein_month[inde] = int(timein_temp.month)
+                  timein_year[inde] = int(timein_temp.year)
+                  if(int(timein_hour[inde])>9):
+                       latepunch[inde] = "late"
+                
+                       
+            elif(status[inde] == 1):
+                  venue_code_out[inde] = venue_entry.get()
+                  timeout_temp = datetime.now()
+                  timeout[inde] = datetime.now()
+                  timeout_hour[inde] = int(timeout_temp.hour)
+                  timeout_minute[inde] = int(timeout_temp.minute)
+                  timeout_seconds[inde] =  int(timeout_temp.second)
+                  timeout_day[inde] = int(timeout_temp.day)
+                  timeout_month[inde] = int(timeout_temp.month)
+                  timeout_year[inde] = int(timeout_temp.year)
+                  if(int(timeout_hour[inde]) <17):
+                       earlypunch[inde] = "early"
+                  time_worked[inde] = int(time_worked[inde]) + (int(timeout_temp.hour)*3600 - (int(timein_hour[inde])*3600)) + (int(timeout_temp.minute*60) - (int(timein_minute[inde])*60)) + (int(timeout_temp.second) - int(timein_seconds[inde]))
+                  if(int(time_worked[inde])>(8*3600)): 
+                       overtime[inde] = int(overtime[inde]) + int(time_worked[inde]-(8*3600))                      
+                  status[inde] = 0
+
+            username_entry.delete(0, 'end')
+            venue_entry.delete(0, 'end')
+            password_entry.delete(0, 'end')
+            window = tkinter.Tk()
+            window.title("Logged in successfully")
+            window.geometry('800x500')
+            window.configure(bg='#333333')
+            frame = tkinter.Frame(window)
+            frame.pack()
+            def logout():
+                window.destroy()                
+
+            def update_data():
+                    global status
+                    global timein 
+                    global timeout
+                    global time_worked
+                    global venue_code_in
+                    global venue_code_out 
+                    global overtime  
+                    global latepunch 
+                    global earlypunch 
+                    global leavedays
+                    global firstname
+                    global lastname
+                    global gender
+                    global age
+                    global typeemployee 
+                    global empolyee_ID 
+                    global passw 
+                    global count
+                    global counter
+                    global personal_leave 
+                    global medical_leave
+                    windows = tkinter.Tk()
+                    windows.title("Data update form")
+                    framed = tkinter.Frame(windows)    
+                    framed.pack()
+                    def update_data_final():
+                        global status
+                        global timein 
+                        global timeout
+                        global time_worked
+                        global venue_code_in
+                        global venue_code_out 
+                        global overtime  
+                        global latepunch 
+                        global earlypunch 
+                        global leavedays
+                        global firstname
+                        global lastname
+                        global gender
+                        global age
+                        global typeemployee 
+                        global empolyee_ID 
+                        global passw 
+                        global count
+                        global counter
+                        global personal_leave 
+                        global medical_leave
+                        firstname[inde]= (first_name_entry.get())
+                        lastname[inde] = (last_name_entry.get())
+                                
+                        if firstname and lastname:
+                            age[inde] = (age_spinbox.get())
+                            passw[inde] = (pass_entry.get())
+                            windows.destroy()
+                            window = tkinter.Tk()
+                            window.title("Data updated successfully")
+                            window.geometry('900x440')
+                            window.configure(bg='#333333')
+                            saved_label = tkinter.Label(window, text="Data for employee saved successfully", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+                            window.mainloop()
+                            
+                    # Saving User Info
+                    user_info_frame =tkinter.LabelFrame(framed, text="User Information update")
+                    user_info_frame.grid(row= 0, column=0, padx=20, pady=10)
+
+                    first_name_label = tkinter.Label(user_info_frame, text="First Name")
+                    first_name_label.grid(row=0, column=0)
+                    last_name_label = tkinter.Label(user_info_frame, text="Last Name")
+                    last_name_label.grid(row=0, column=1)
+
+                    first_name_entry = tkinter.Entry(user_info_frame)
+                    last_name_entry = tkinter.Entry(user_info_frame)
+                    first_name_entry.grid(row=1, column=0)
+                    last_name_entry.grid(row=1, column=1)
+
+
+                    age_label = tkinter.Label(user_info_frame, text="Age")
+                    age_spinbox = tkinter.Spinbox(user_info_frame, from_=18, to=110)
+                    age_label.grid(row=2, column=0)
+                    age_spinbox.grid(row=3, column=0)
+
+    
+
+                    for widget in user_info_frame.winfo_children():
+                        widget.grid_configure(padx=10, pady=5)
+
+
+                    # Saving Course Info
+                    courses_frame = tkinter.LabelFrame(framed)
+                    courses_frame.grid(row=1, column=0, sticky="news", padx=20, pady=10)
+
+                    pass_label = tkinter.Label(courses_frame, text= "Password")
+                    pass_entry= tkinter.Entry(courses_frame)
+                    pass_label.grid(row=0, column=2)
+                    pass_entry.grid(row=1, column=2)
+
+                    for widget in courses_frame.winfo_children():
+                        widget.grid_configure(padx=10, pady=5)
+
+
+                    # Button
+                    button = tkinter.Button(framed, text="Enter Updated data", command= update_data_final)
+                    button.grid(row=3, column=0, sticky="news", padx=20, pady=10)
+                    window.mainloop()
+                    
+            def leaves():
+                global status
+                global timein 
+                global timeout
+                global time_worked
+                global venue_code_in
+                global venue_code_out 
+                global overtime  
+                global latepunch 
+                global earlypunch 
+                global leavedays
+                global firstname
+                global lastname
+                global gender
+                global age
+                global typeemployee 
+                global empolyee_ID 
+                global passw 
+                global count
+                global counter
+                global personal_leave 
+                global medical_leave
+                windowed = tkinter.Tk()
+                windowed.title("Leaves")
+                windowed.geometry('900x440')
+                windowed.configure(bg='#333333')
+                frameds = tkinter.Frame(windowed)
+                frameds.pack()
+                
+                leaves_label = tkinter.Label(frameds, text="Enter the number of days you will be on leave", bg='#333333', fg="#2ff900", font=("Arial", 30))             
+                leaves_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+
+                lday_label = tkinter.Label(frameds, text="No.of days ")
+                lday_spinbox = tkinter.Spinbox(frameds, from_=0, to=20)
+                lday_label.grid(row=2, column=0)
+                lday_spinbox.grid(row=3, column=0)
+
+                TOL_label = tkinter.Label(frameds, text="Type of leave")
+                TOL_combobox = ttk.Combobox(frameds, values=["Personal" , "Medical"])
+                TOL_label.grid(row=2, column=1)
+                TOL_combobox.grid(row=3, column=1)
+
+                
+
+                def leaves_lol():
+                    global status
+                    global timein 
+                    global timeout
+                    global time_worked
+                    global venue_code_in
+                    global venue_code_out 
+                    global overtime  
+                    global latepunch 
+                    global earlypunch 
+                    global leavedays
+                    global firstname
+                    global lastname
+                    global gender
+                    global age
+                    global typeemployee 
+                    global empolyee_ID 
+                    global passw 
+                    global count
+                    global counter
+                    global personal_leave 
+                    global medical_leave
+                    global personal_leave
+                    global medical_leave
+                    global leavedays
+                    if(TOL_combobox.get() == "Personal" and personal_leave>0):
+                        if(int(lday_spinbox.get())<=personal_leave):
+                            personal_leave = personal_leave - int(lday_spinbox.get())
+                            leavedays = int(lday_spinbox.get())
+                            window = tkinter.Tk()
+                            window.title("PL granted")
+                            window.geometry('900x440')
+                            window.configure(bg='#333333')
+                            saved_label = tkinter.Label(window, text="Personal Leave granted", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            saved_label.pack()
+                            window.mainloop()
+                        else:
+                            window = tkinter.Tk()
+                            window.title("PL not granted")
+                            window.geometry('900x440')
+                            window.configure(bg='#333333')
+                            var = IntVar() 
+                            var.set(personal_leave)  
+                            saved_label = tkinter.Label(window, text="Not enough leaves, try again", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            bruh_label = tkinter.Label(window, text= "Personal leaves available:", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            dude_label = tkinter.Label(window, textvariable = var, bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            saved_label.pack()
+                            bruh_label.pack()
+                            dude_label.pack()
+                            window.mainloop()
+                    
+                    if(TOL_combobox.get() == "Medical" and medical_leave>0):
+                        if(int(lday_spinbox.get())<=medical_leave):
+                            personal_leave = medical_leave - int(lday_spinbox.get())
+                            leavedays = int(lday_spinbox.get())
+                            window = tkinter.Tk()
+                            window.title("ML granted")
+                            window.geometry('900x440')
+                            window.configure(bg='#333333')
+                            saved_label = tkinter.Label(window, text="Your Medical leave is granted, take care!", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            saved_label.pack()
+                            window.mainloop()
+                        else:
+                            window = tkinter.Tk()
+                            window.title("PL not granted")
+                            window.geometry('900x440')
+                            window.configure(bg='#333333')
+                            var = IntVar() 
+                            var.set(medical_leave)  
+                            saved_label = tkinter.Label(window, text="Not enough leaves available for this year", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            bruh_label = tkinter.Label(window, text= "Medical leaves will be deducted from next year", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            lolmao_label = tkinter.Label(window, text= "Next Year's Medical leaves:", bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            dude_label = tkinter.Label(window, textvariable = 12+(var-int(lday_spinbox.get())), bg='#333333', fg="#2ff900", font=("Arial", 30))
+                            medical_leave = 12+(var-int(lday_spinbox.get()))
+                            saved_label.pack()
+                            lolmao_label.pack()
+                            bruh_label.pack()
+                            dude_label.pack()
+                            window.mainloop()
+                    
+                apply_button = tkinter.Button(frameds, text="Apply leave", command= leaves_lol)
+                apply_button.grid(row=4, column=1, sticky="news", padx=20, pady=10)
+                windowed.mainloop()
+
+            leaves_button = tkinter.Button(frame, text="Apply for leaves", bg="#1388e9", fg="#FFFFFF", font=("Arial", 16), command = leaves)
+            personal_button = tkinter.Button(frame, text="Update personal information", bg="#1388e9", fg="#FFFFFF", font=("Arial", 16), command = update_data)
+            signout_button = tkinter.Button(frame, text="LOGOUT", bg="#1388e9", fg="#FFFFFF", font=("Arial", 16), command = logout)
+        
+            personal_button.grid(row=0, column=1, pady=40, sticky="news")
+            signout_button.grid(row=1, column=2, pady=40, sticky="news")
+            leaves_button.grid(row=0, column=2, columnspan=2, pady=40, sticky="news")
+            window.mainloop()
+                                  
+        else:
+            window = tkinter.Tk()
+            window.title("Wrong password, try again")
+            window.geometry('900x440')
+            window.configure(bg='#333333')
+            saved_label = tkinter.Label(window, text="Error in authentication", bg='#333333', fg="#2ff900", font=("Arial", 30))
+            saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+            window.mainloop()
+    else:
+        window = tkinter.Tk()
+        window.title("Employee ID authentication error")
+        window.geometry('900x440')
+        window.configure(bg='#333333')
+        saved_label = tkinter.Label(window, text="Employee ID not found", bg='#333333', fg="#2ff900", font=("Arial", 30))
+        saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+        window.mainloop()       
+
+def endatten_button():
+    global status
+    global timein 
+    global timeout
+    global time_worked
+    global venue_code_in
+    global venue_code_out 
+    global overtime  
+    global latepunch 
+    global earlypunch 
+    global leavedays
+    global firstname
+    global lastname
+    global gender
+    global age
+    global typeemployee 
+    global empolyee_ID 
+    global passw 
+    global count
+    global counter
+    global personal_leave 
+    global medical_leave
+    with open("C:/Users/khush/OneDrive/Desktop/python/pythonprojectfile.txt" ,'a') as f:
+        for i in range(0,count):
+            if (atten[i]==0):
+                if(int(leavedays) == 0):
+                    f.write(firstname[i] + lastname[i] + " was absent for today. Employee ID: " + empolyee_ID[i] +"\n")
+                else:
+                    leavedays = int(int(leavedays) - 1)
+            else:
+                f.write("The punch in time for "+ firstname[i] +" "+ lastname[i] +" was " )
+                f.write(str(timein_hour[i]) + ":" + str(timein_minute[i]) +":" + str(timein_seconds[i])+ " " +str(timein_day[i])+ "/"+ str( timein_month[i]) +"/" + str(timein_year[i]))
+                f.write("\n")
+                f.write("The punch out time for "+ firstname[i] +" "+ lastname[i] +" was ")
+                f.write(str(timeout_hour[i]) + ":" + str(timeout_minute[i]) +":" + str(timeout_seconds[i]) + " "+ str(timeout_day[i]) + "/"+ str(timeout_month[i])+ "/" + str(timeout_year[i] ))
+                f.write("\n")
+                f.write("The venue code in for " + firstname[i] +" "+ lastname[i] +" was " + str(venue_code_in[i]) +"\n")
+                f.write("The venue code out for " + firstname[i] +" "+ lastname[i] +" was " + str(venue_code_out[i]) +"\n")
+                f.write("The overtime for " + firstname[i] + " " +lastname[i] +" is " + str(overtime[i])+"\n")
+                if(latepunch[i] =="late"):
+                    f.write(firstname[i] +" "+ lastname[i] +" was " + str(latepunch[i])+"\n")
+                if(earlypunch[i] == "early"):
+                    f.write(firstname[i] +" " + lastname[i] +" punched out " + str(earlypunch[i]) +"\n")
+                latepunch[i] = 0
+                atten[i] = 0
+                earlypunch[i] = 0
+                temp[i]= i
+        for i in range(0,counter-1):
+            tempover[i] = int(overtime[i])
+        for i in range(0,counter-1):
+            for j in range(0,counter-i-1):
+                if(tempover[j]>tempover[j+1]):
+                    temptemp = tempover[j]
+                    tempover[j] = tempover[j+1]
+                    tempover[j+1] = temptemp
+                    temptemptemp = temp[j]
+                    tempover[j] = temp[j+1]
+                    temp[j+1] = temptemptemp
+        f.write("The members arranged in order of most hardworking based on overtime is:\n")
+        for i in range(0,counter):
+            f.write(firstname[i] +" " + lastname[i] +"\n")
+
+    window = tkinter.Tk()
+    window.title("End Attendance")
+    window.geometry('900x440')
+    window.configure(bg='#333333')
+    saved_label = tkinter.Label(window, text="The attendance for the day is over", bg='#333333', fg="#2ff900", font=("Arial", 30))
+    saved_label.pack()
+    window_login.destroy()
+    window.mainloop()
+    
+
+
+               
+     
+login_label = tkinter.Label(
+    frame, text="Login", bg='#333333', fg="#1388e9", font=("Arial", 30))
+
+username_label = tkinter.Label(
+    frame, text="Username", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+username_entry = tkinter.Entry(frame, font=("Arial", 16))
+endatten_label = tkinter.Label(frame, text="End attendance for the day", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+
+venue_label = tkinter.Label(
+    frame, text="Venue Code", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+venue_entry = tkinter.Entry(frame, font=("Arial", 16))
+
+password_entry = tkinter.Entry(frame, show="*", font=("Arial", 16))
+password_label = tkinter.Label(
+    frame, text="Password", bg='#333333', fg="#FFFFFF", font=("Arial", 16))
+login_button = tkinter.Button(
+    frame, text="Login", bg="#1388e9", fg="#FFFFFF", font=("Arial", 16), command = login)
+endatten = tkinter.Button(
+    frame, text="End attendance", bg="#1388e9", fg="#FFFFFF", font=("Arial", 16), command = endatten_button)
+
+# Placing widgets on the screen
+login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+username_label.grid(row=1, column=0)
+password_label.grid(row=2, column=0)
+venue_label.grid(row = 3, column = 0)
+endatten_label.grid(row = 4, column = 0)
+
+
+username_entry.grid(row=1, column=1, pady=20)
+password_entry.grid(row=2, column=1, pady=20)
+venue_entry.grid(row = 3, column = 1, pady=20) 
+
+endatten.grid(row=5, column=0,columnspan=2, pady=30)
+login_button.grid(row=4, column=3, columnspan=2, pady=30)
+
+frame.pack()
+window.mainloop()
