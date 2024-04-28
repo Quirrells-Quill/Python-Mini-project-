@@ -1,0 +1,7 @@
+window = tkinter.Tk()
+window.title("Data updated successfully")
+window.geometry('900x440')
+window.configure(bg='#333333')
+saved_label = tkinter.Label(window, text="Data for employee saved successfully", bg='#333333', fg="#2ff900", font=("Arial", 30))
+saved_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
+window.mainloop()
